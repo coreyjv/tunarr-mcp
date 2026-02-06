@@ -6,6 +6,7 @@ import * as listChannelsTool from './channels/list-channels.js'
 import * as listMoviesInChannelTool from './channels/list-movies-in-channel.js'
 import * as listShowsInChannelTool from './channels/list-shows-in-channel.js'
 import * as listMediaSourcesTool from './media-sources/list-media-sources.js'
+import * as searchProgramsTool from './programs/search-programs.js'
 
 // Create server instance
 const server = new McpServer({
@@ -70,6 +71,27 @@ server.registerTool(listShowsInChannelTool.name, listShowsInChannelTool.config, 
 
 server.registerTool(listMediaSourcesTool.name, listMediaSourcesTool.config, async () => {
   const result = await listMediaSourcesTool.listMediaSources({ server: TUNARR_HOST })
+
+  return {
+    content: [
+      {
+        type: 'text',
+        text: JSON.stringify(result, null, 2)
+      }
+    ],
+    structuredContent: result
+  }
+})
+
+server.registerTool(searchProgramsTool.name, searchProgramsTool.config, async ctx => {
+  const result = await searchProgramsTool.searchPrograms({
+    query: ctx.query,
+    mediaSourceId: ctx.mediaSourceId,
+    libraryId: ctx.libraryId,
+    page: ctx.page,
+    limit: ctx.limit,
+    server: TUNARR_HOST
+  })
 
   return {
     content: [
