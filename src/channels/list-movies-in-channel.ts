@@ -1,9 +1,9 @@
 import { z } from 'zod'
-import { Movie } from './schemas.js'
+import { MovieItemSchema } from '../schemas.js'
 
 const OutputSchema = z.object({
   total: z.number(),
-  movies: z.array(Movie),
+  movies: z.array(MovieItemSchema),
   size: z.number()
 })
 

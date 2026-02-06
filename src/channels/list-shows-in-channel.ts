@@ -1,9 +1,9 @@
 import { z } from 'zod'
-import { Show } from './schemas.js'
+import { ShowItemSchema } from '../schemas.js'
 
 const OutputSchema = z.object({
   total: z.number(),
-  shows: z.array(Show),
+  shows: z.array(ShowItemSchema),
   size: z.number()
 })
 

@@ -4,7 +4,7 @@ import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest'
 import { listShowsInChannel, name, config } from './list-shows-in-channel.js'
 
 const mockShow = {
-  uuid: 'show-uuid-1',
+  uuid: 'f81d4fae-7dec-11d0-a765-00a0c91e6bf6',
   canonicalId: 'canonical-1',
   sourceType: 'plex',
   externalId: 'ext-1',

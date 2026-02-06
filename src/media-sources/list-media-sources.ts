@@ -1,8 +1,7 @@
 import { z } from 'zod'
+import { SourceTypeSchema } from '../schemas.js'
 
 const MediaTypeSchema = z.enum(['movies', 'shows', 'music_videos', 'other_videos', 'tracks'])
-
-const SourceTypeSchema = z.enum(['plex', 'jellyfin', 'emby', 'local'])
 
 const LibrarySchema = z.object({
   id: z.string().uuid(),
