@@ -31,7 +31,6 @@ export async function listShowsInChannel({
   offset,
   limit
 }: z.infer<typeof InputSchema> & { server: string }): Promise<z.infer<typeof OutputSchema>> {
-  console.error('listShowsInChannel', { server, id, offset, limit })
   const response = await fetch(`${server}/api/channels/${id}/shows?offset=${offset}&limit=${limit}`, {
     method: 'GET',
     headers: {

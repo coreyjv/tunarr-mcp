@@ -18,8 +18,6 @@ export const config = {
 }
 
 export async function listChannels({ server }: { server: string }): Promise<z.infer<typeof OutputSchema>> {
-  console.error('A')
-
   const response = await fetch(`${server}/api/channels`, {
     method: 'GET',
     headers: {
@@ -27,15 +25,11 @@ export async function listChannels({ server }: { server: string }): Promise<z.in
     }
   })
 
-  console.error(response.ok)
   if (!response.ok) {
-    //TODO Log appropriately.
     throw new Error('Unable to list channels')
   }
 
   const json = await response.json()
-
-  console.error(JSON.stringify(json, null, 2))
 
   return OutputSchema.parse({ channels: json })
 }

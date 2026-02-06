@@ -12,7 +12,7 @@ const InputSchema = z.object({
   query: QueryObjectSchema.describe('Search query object containing search text, filters, and sort options'),
   mediaSourceId: z.string().optional().describe('Filter by media source ID'),
   libraryId: z.string().optional().describe('Filter by library ID'),
-  page: z.number().optional().default(1).describe('Page number'),
+  page: z.number().optional().default(0).describe('Page number'),
   limit: z.number().optional().default(50).describe('Number of results per page')
 })
 
@@ -53,8 +53,6 @@ export async function searchPrograms({
   if (libraryId) {
     body.libraryId = libraryId
   }
-
-  console.error(JSON.stringify(body, null, 2))
 
   const response = await fetch(`${server}/api/programs/search`, {
     method: 'POST',
