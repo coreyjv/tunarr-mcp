@@ -5,6 +5,7 @@ import { z } from 'zod'
 import * as listChannelsTool from './channels/list-channels.js'
 import * as listMoviesInChannelTool from './channels/list-movies-in-channel.js'
 import * as listShowsInChannelTool from './channels/list-shows-in-channel.js'
+import * as listMediaSourcesTool from './media-sources/list-media-sources.js'
 
 // Create server instance
 const server = new McpServer({
@@ -55,6 +56,20 @@ server.registerTool(listShowsInChannelTool.name, listShowsInChannelTool.config, 
     offset: ctx.offset,
     server: TUNARR_HOST
   })
+
+  return {
+    content: [
+      {
+        type: 'text',
+        text: JSON.stringify(result, null, 2)
+      }
+    ],
+    structuredContent: result
+  }
+})
+
+server.registerTool(listMediaSourcesTool.name, listMediaSourcesTool.config, async () => {
+  const result = await listMediaSourcesTool.listMediaSources({ server: TUNARR_HOST })
 
   return {
     content: [
